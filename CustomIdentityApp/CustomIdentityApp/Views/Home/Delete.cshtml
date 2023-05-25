@@ -1,0 +1,18 @@
+@model CustomIdentityApp.Models.Orders
+@{
+    ViewData["Title"] = "Delete Page";
+}
+
+<section class="order_delete">
+    <div class="wrapper">
+        <div class="order_delete_wrapper">
+            <div class="order_delete_screen">
+                <form asp-controller="Home" asp-action="Delete" method="post">
+                    <div class="form-group">
+                        <input type="submit" class="btn btn-default" value="Удалить">
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</section>

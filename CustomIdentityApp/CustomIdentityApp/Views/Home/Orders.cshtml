@@ -1,0 +1,40 @@
+@model IEnumerable<CustomIdentityApp.Models.Orders>
+@{
+    ViewData["Title"] = "Orders Page";
+}
+
+<section class="orders">
+    <div class="wrapper">
+        <div class="orders_wrapper">
+            <div class="orders_table">
+                <table class="orders_t">
+                    <tr>
+                        <td>ФИО</td>
+                        <td>Почта</td>
+                        <td>Откуда</td>
+                        <td>Куда</td>
+                        <td>Вес</td>
+                        <td>Тип груза</td>
+                        <td>Дата доставки</td>
+                    </tr>
+                    @foreach (var item in Model)
+                    {
+                        <tr>
+                            <td>@item.FullName</td>
+                            <td>@item.Email</td>
+                            <td>@item.From</td>
+                            <td>@item.To</td>
+                            <td>@item.Weight</td>
+                            <td>@item.CargoType</td>
+                            <td>@item.Date</td>
+                            <td>
+                                <a asp-action="Delete" asp-controller="Home" asp-route-id="@item.Id">Принять</a>
+                                <a asp-action="Delete" asp-controller="Home" asp-route-id="@item.Id">Отклонить</a>
+                            </td>
+                        </tr>
+                    }
+                </table>
+            </div>
+        </div>
+    </div>
+</section>

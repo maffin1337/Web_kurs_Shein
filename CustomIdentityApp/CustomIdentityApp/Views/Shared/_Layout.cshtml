@@ -1,0 +1,104 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>@ViewData["Title"] - CustomIdentityApp</title>
+    <link rel="stylesheet" href="~/css/reset.css" type="text/css" media="screen" runat="server">
+    <link rel="stylesheet" href="~/css/style.css" type="text/css" media="screen" runat="server">
+</head>
+<body>
+    <header class="header">
+        <div class="wrapper">
+            <div class="header_wrapper">
+                <div class="header_logo">
+                    <a class="header_logo-link" asp-area="" asp-controller="Home" asp-action="Index">
+                        <img src="~/img/svg/logo.svg" alt="Cargo Taxi" class="header_logo-img">
+                    </a>
+                </div>
+                <nav class="header_nav">
+                    <ul class="header_list">
+                        <li class="header_item">
+                            <a class="header_link" asp-area="" asp-controller="Home" asp-action="Index">Главная</a>
+                        </li>
+                        <li class="header_item">
+                            <a class="header_link" asp-area="" asp-controller="Home" asp-action="Cars">Машины</a>
+                        </li>
+                        <li class="header_item">
+                            <a class="header_link" asp-area="" asp-controller="Home" asp-action="About">О нас</a>
+                        </li>
+                        @if (User.Identity.IsAuthenticated)
+                        {
+                            @if (User.IsInRole("Admin"))
+                            {
+                                <li class="header_item">
+                                    <a class="header_link" asp-area="" asp-controller="Roles" asp-action="Index">Управление ролями</a>
+                                </li>
+                                <li class="header_item-logout">
+                                    <form method="post" asp-controller="Account" asp-action="Logout">
+                                        <input type="submit" value="Выход" />
+                                    </form>
+                                </li>
+                            }
+                            @if (User.IsInRole("Moderator"))
+                            {
+                                <li class="header_item">
+                                    <a class="header_link" asp-area="" asp-controller="Home" asp-action="Orders">Заказы</a>
+                                </li>
+                                <li class="header_item-logout">
+                                    <form method="post" asp-controller="Account" asp-action="Logout">
+                                        <input type="submit" value="Выход" />
+                                    </form>
+                                </li>
+                            }
+                            @if (User.IsInRole("User"))
+                            {
+                                <li class="header_item">
+                                    <a class="header_link" asp-area="" asp-controller="Home" asp-action="Booking">Сделать заказ</a>
+                                </li>
+                                <li class="header_item-logout">
+                                    <form method="post" asp-controller="Account" asp-action="Logout">
+                                        <input type="submit" value="Выход" />
+                                    </form> 
+                                </li>
+                            }
+                        }
+                        else
+                        {
+                            <div class="header_login">
+                            <a class="header_booking-link" asp-area="" asp-controller="Account" asp-action="Login">
+                                <img src="~/img/svg/login_button.svg" alt="Login button" class="login_button-img">
+                            </a>
+                            </div>
+                        }
+                    </ul>
+                </nav>    
+            </div>
+        </div>
+    </header>
+    <main class="main">
+        @RenderBody()
+    </main>
+
+    <footer class="border-top footer text-muted">
+        <div class="wrapper">
+            <div class="footer_wrapper">
+                <section id="contact">
+                    <h2>Обратная связь</h2>
+                    <form>
+                        <input type="text" placeholder="ФИО">
+                        <input type="email" placeholder="Почта">
+                        <textarea placeholder="Комментарий"></textarea>
+                        <input type="submit" value="Отправить">
+                      </form>
+                </section>
+            </div>
+        </div>
+    </footer>
+    <script src="~/lib/jquery/dist/jquery.min.js"></script>
+    <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="~/js/site.js" asp-append-version="true"></script>
+    @await RenderSectionAsync("Scripts", required: false)
+</body>
+</html>

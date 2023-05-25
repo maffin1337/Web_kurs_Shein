@@ -1,0 +1,27 @@
+﻿@using Microsoft.AspNetCore.Identity
+@model CustomIdentityApp.ViewModels.ChangeRoleViewModel
+
+<section class="roles_edit">
+    <div class="wrapper">
+        <div class="roles_edit_wrapper">
+            <div class="roles_edit_form">
+                <form asp-action="Edit" method="post">
+                    <input type="hidden" name="userId" value="@Model.UserId" />
+                    <div class="edit_form-group">
+                        @foreach (IdentityRole role in Model.AllRoles)
+                        {
+                            <ul class="checkboxes">
+                                <li class="checkbox-group">
+                                    <label class="role_name">@role.Name</label>
+                                    <input type="checkbox" name="roles" value="@role.Name"
+                                    @(Model.UserRoles.Contains(role.Name) ? "checked=\"checked\"" : "") />
+                                </li>
+                            </ul>
+                        }
+                    </div>
+                    <input type="submit" value="Сохранить">
+                </form>
+            </div>
+        </div>
+    </div>
+</section>

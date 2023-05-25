@@ -1,0 +1,80 @@
+@{
+    ViewData["Title"] = "Cars Page";
+}
+
+<section class="car_show">
+    <div class="wrapper">
+        <div class="car_show-wrapper">
+            <h3>Машины</h3>
+            <section id="truck-gallery">
+                <div class="truck-frame">
+                    <div id="trucks">
+                        <div id="truck-container">
+                            <img id="truck-image" src="" alt="" />
+                            <button id="prev-button">&larr;</button>
+                            <button id="next-button">&rarr;</button>
+                        </div>
+                        <p id="truck-name"></p>
+                    </div>
+                </div>
+            </section>
+            <script>
+                const truckGallery = [
+                    {
+                        image: "/img/png/truck1.png",
+                        name: "Truck 1"
+                    },
+                    {
+                        image: "/img/png/truck2.png",
+                        name: "Truck 2"
+                    },
+                    {
+                        image: "/img/png/truck3.png",
+                        name: "Truck 3"
+                    },
+                    {
+                        image: "/img/png/truck4.png",
+                        name: "Truck 4"
+                    }
+                ];
+
+                const truckImage = document.querySelector("#truck-image");
+                const truckName = document.querySelector("#truck-name");
+                const prevButton = document.querySelector("#prev-button");
+                const nextButton = document.querySelector("#next-button");
+
+                let currentIndex = 0;
+
+                function displayTruck(index) {
+                    truckImage.src = truckGallery[index].image;
+                    truckImage.alt = truckGallery[index].name;
+                    truckName.textContent = truckGallery[index].name;
+                }
+
+                displayTruck(currentIndex);
+
+                nextButton.addEventListener("click", function () {
+                    currentIndex++;
+                    if (currentIndex >= truckGallery.length) {
+                        currentIndex = 0;
+                    }
+                    displayTruck(currentIndex);
+                });
+
+                prevButton.addEventListener("click", function () {
+                    currentIndex--;
+                    if (currentIndex < 0) {
+                        currentIndex = truckGallery.length - 1;
+                    }
+                    displayTruck(currentIndex);
+                });
+            </script>
+            <div class="car_text">
+                <p>Наша компания предлагает надежные транспортные услуги, гарантирующие безопасную доставку в любое
+                    место. Благодаря нашему автопарку специально разработанных автоперевозчиков и опытным водителям вы
+                    можете доверить нам бережное обращение с вашим драгоценным имуществом. Свяжитесь с нами сегодня,
+                    чтобы запланировать вашу перевозку.</p>
+            </div>
+        </div>
+    </div>
+</section>
